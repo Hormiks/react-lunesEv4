@@ -64,6 +64,11 @@ const PokemonFetcher = () => {
               nombre: pokemonData.name,
               imagen: pokemonData.sprites.front_default,
               tipos: traducirTipos(pokemonData.types.map(typeInfo => typeInfo.type.name)), 
+              hp: pokemonData.stats.find(stat => stat.stat.name === 'hp').base_stat,
+              ataque: pokemonData.stats.find(stat => stat.stat.name === 'attack').base_stat,
+              defensa: pokemonData.stats.find(stat => stat.stat.name === 'defense').base_stat,
+              velocidad: pokemonData.stats.find(stat => stat.stat.name === 'speed').base_stat,
+              habilidades: pokemonData.abilities.map(ability => ability.ability.name).join(', '),
             });
           }
           setPokemones(fetchedPokemones);
@@ -110,7 +115,12 @@ const PokemonFetcher = () => {
             id: data.id,
             nombre: data.name,
             imagen: data.sprites.front_default,
-            tipos: traducirTipos(data.types.map(typeInfo => typeInfo.type.name)), 
+            tipos: traducirTipos(data.types.map(typeInfo => typeInfo.type.name)),
+            hp: data.stats.find(stat => stat.stat.name === 'hp').base_stat,
+            ataque: data.stats.find(stat => stat.stat.name === 'attack').base_stat,
+            defensa: data.stats.find(stat => stat.stat.name === 'defense').base_stat,
+            velocidad: data.stats.find(stat => stat.stat.name === 'speed').base_stat,
+            habilidades: data.abilities.map(ability => ability.ability.name).join(', '),
           });
         }
         setPokemonesAleatorios(aleatorios);
@@ -139,49 +149,82 @@ const PokemonFetcher = () => {
 
   return (
     <div className='pokemon-container'>
-      <h2>Tus 4 Pokémon Aleatorios</h2>
-      <img className="pokeball" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/029b8bd9-cb5a-41e4-9c7e-ee516face9bb/dayo3ow-7ac86c31-8b2b-4810-89f2-e6134caf1f2d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyOWI4YmQ5LWNiNWEtNDFlNC05YzdlLWVlNTE2ZmFjZTliYlwvZGF5bzNvdy03YWM4NmMzMS04YjJiLTQ4MTAtODlmMi1lNjEzNGNhZjFmMmQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ooubhxjHp9PIMhVxvCFHziI6pxDAS8glXPWenUeomWs" alt="Descripción de la imagen"></img>
+      <div className="titulo-con-gif">
+        <h3>Tus 4 Pokémon Aleatorios</h3>
+        <img
+          className="pokeball"
+          src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/029b8bd9-cb5a-41e4-9c7e-ee516face9bb/dayo3ow-7ac86c31-8b2b-4810-89f2-e6134caf1f2d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyOWI4YmQ5LWNiNWEtNDFlNC05YzdlLWVlNTE2ZmFjZTliYlwvZGF5bzNvdy03YWM4NmMzMS04YjJiLTQ4MTAtODlmMi1lNjEzNGNhZjFmMmQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ooubhxjHp9PIMhVxvCFHziI6pxDAS8glXPWenUeomWs"
+          alt="Pokebola animada"
+        />
+      </div>
+
       <div className="pokemon-list random-list">
         {pokemonesAleatorios.map(pokemon => (
-          <div key={pokemon.id} className="pokemon-card">
-            <h3>{pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</h3>
-            <img src={pokemon.imagen} alt={pokemon.nombre} /> 
-            <p>
-              <strong>Tipos:</strong> {pokemon.tipos.join(', ')}  
-            </p>
+      <div key={pokemon.id} className="pokemon-card">
+        <h3>• {pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)} •</h3>     
+        <img src={pokemon.imagen} alt={pokemon.nombre} />  
+        <div>
+          {pokemon.tipos.map((tipo, index) => (
+            <span key={index} className={`tipo ${tipo}`}>{tipo}</span>
+          ))}
+        </div>
+        <hr />
+        <div className="altura-peso">
+          <div>
+            <strong>0.7 M</strong>
+            <span>Altura</span>
           </div>
+          <div>
+            <strong>6.9 KG</strong>
+            <span>Peso</span>
+          </div>
+        </div>
+      </div>
         ))}
       </div>
-
-      <h3>- Buscar pokémon:</h3>
+      <br />
+      <div class="linea"></div>
+      <h3>-- Pokedex --</h3>
       <div>
-        <input
-          type="text"
-          placeholder="Buscar Pokémon"
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-        />
-        <select onChange={(e) => setCriterioFiltro(e.target.value)}>
-          <option value="nombre">Por Nombre</option>
-          <option value="tipo">Por Tipo</option>
-        </select>
+      <input       
+        type="text"
+        placeholder="Buscar Pokémon"
+        value={filtro}
+        onChange={(e) => setFiltro(e.target.value)}
+      />
+      <select onChange={(e) => setCriterioFiltro(e.target.value)}>
+       <option value="nombre">Por Nombre</option>
+       <option value="tipo">Por Tipo</option>
+      </select>
+      <img className='gif' src="/src/multimedia/gif.gif" alt="icono pokedex"  />
       </div>
-      <img className='otrogif' src="/src/multimedia/gif.gif" alt="" />
-
-      
+   
       {filtro && (
         <>
-          <h2>Tus Pokémon Filtrados</h2>
           <div className="pokemon-list">
             {pokemonesFiltrados.length > 0 ? (
               pokemonesFiltrados.map(pokemon => (
-                <div key={pokemon.id} className="pokemon-card">
-                  <h3>{pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</h3>
-                  <img src={pokemon.imagen} alt={pokemon.nombre} />
-                  <p>
-                    <strong>Tipos:</strong> {pokemon.tipos.join(', ')}  
-                  </p>
-                </div>
+          <div key={pokemon.id} className="pokemon-card">
+            <h3>• {pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)} •</h3>
+            <img src={pokemon.imagen} alt={pokemon.nombre} />
+            <div>
+              {pokemon.tipos.map((tipo, index) => (
+                <span key={index} className={`tipo ${tipo}`}>{tipo}</span>
+              ))}
+            </div>
+            <hr />
+
+            <div className="altura-peso">
+              <div>
+                <strong>0.7 M</strong>
+                <span>Altura</span>
+              </div>
+              <div>
+                <strong>6.9 KG</strong>
+                <span>Peso</span>
+              </div>
+            </div>
+          </div>
               ))
             ) : (
               <p>No se encontraron Pokémon con ese criterio.</p>

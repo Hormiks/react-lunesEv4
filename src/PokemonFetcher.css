@@ -9,13 +9,24 @@ body {
   align-items: flex-start;
   min-height: 100vh;
   background-image:url(https://wallpapercave.com/wp/wp3118383.jpg);
+  background-attachment: fixed;
   background-size: cover;
 }
+.linea {
+  height: 2px;
+  width: 1200px;
+  background-color: #9a988eaa;
+  margin: 20px auto;
+  box-shadow: 2px 2px #000000a2;
+}
+
 
 /* Contenedor principal para el contenido de los Pokémon */
 .pokemon-container {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+  border-color: #000000;
+  border-style: double;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 1200px;
@@ -27,7 +38,7 @@ body {
   margin-left: auto;  
   margin-right: auto; 
   min-height: 600px;  
-  height: auto;       
+  height: auto;  
 }
 
 .pokemon-container:hover {
@@ -61,13 +72,14 @@ img {
   margin-bottom: 40px;
 }
 .pokemon-container h3 {
-  font-size: 1.5rem;
-  color: #3e3e3e;
+  font-family: 'VT323', monospace;
+  font-size: 2.2rem;
+  color: #1a1818;
   font-weight: 700;
   margin-bottom: 40px;
-  text-align: left;
+  text-align: center;
+  vertical-align: middle;
 }
-
 
 .pokemon-list {
   display: flex;
@@ -76,6 +88,38 @@ img {
   gap: 20px;
   margin-top: 30px;
 }
+.tipo {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  margin: 2px;
+  text-transform: uppercase;
+}
+
+/* Colores personalizados por tipo */
+.tipo.Planta { background-color: #78C850; }
+.tipo.Veneno { background-color: #A040A0; }
+.tipo.Fuego { background-color: #F08030; }
+.tipo.Agua { background-color: #6890F0; }
+.tipo.Eléctrico { background-color: #F8D030;}
+.tipo.Normal { background-color: #A8A878; }
+.tipo.Bicho { background-color: #A8B820; }
+.tipo.Volador { background-color: #A890F0; }
+.tipo.Tierra { background-color: #E0C068; }
+.tipo.Hada { background-color: #EE99AC; }
+.tipo.Psíquico { background-color: #F85888; }
+.tipo.Lucha { background-color: #C03028; }
+.tipo.Acero { background-color: #787881; }
+.tipo.Fantasma { background-color: #705898; }
+.tipo.Siniestro { background-color: #705848; }
+.tipo.Dragón { background-color: #7038F8; }
+.tipo.Hielo { background-color: #98D8D8; }
+.tipo.Roca { background-color: #B8A038; }
+.tipo.Sombra { background-color: #000000; }
+.tipo.Desconocido { background-color: #68A090; }
 
 /* Estilo para la lista de Pokémon aleatorios */
 .pokemon-list.random-list {
@@ -86,46 +130,82 @@ img {
   padding-left: 10px;           
   padding-right: 10px;        
 }
+.titulo-con-icono {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espacio entre icono y texto */
+  margin: 10px 0;
+}
+
+.titulo-con-icono img.otrogif {
+  width: 24px;
+  height: 24px;
+}
 
 /* Estilo para las tarjetas de los Pokémon */
 .pokemon-card {
-  background-color: #ffffff;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  padding: 10px; 
-  width: 150px;   
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(to bottom, #42424d52, #dadce0);
+  border-radius: 20px;
+  border-color: #2524243f;
+  border-style: double;
+  width: 180px;
+  padding: 15px 10px;
   text-align: center;
-}
-
-.pokemon-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.pokemon-card h3 {
-  font-size: 1.1rem; 
-  color: #007bff;
-  margin-top: 0;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  position: relative;
+  font-family: 'Arial', sans-serif;
 }
 
 .pokemon-card img {
-  width: 80px;    
-  height: 80px;   
+  width: 100px;
+  height: 100px;
   object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.pokemon-card h3 {
+
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
-.pokemon-card p {
-  font-size: 0.8rem;  
-  color: #555;
+.tipo {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  margin: 4px 4px 10px 4px;
+  text-transform: uppercase;
 }
 
-.pokemon-card p strong {
-  font-weight: 600;
-  color: #333;
+
+/* (agrega los demás según necesidad) */
+
+/* Altura y peso */
+.altura-peso {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  margin-top: 10px;
 }
+
+.altura-peso div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.altura-peso span {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
 
 /* Estilo para los botones */
 button {
@@ -182,6 +262,23 @@ input[type="text"] {
   width: 50px;
 }
 
-.otrogif{
-  width: 100px;
+.gif{
+  justify-content:left; 
+  width: 90px;
+}
+.titulo-con-gif {
+  display: flex;
+  align-items: center;    /* centra verticalmente */
+  justify-content: center; /* centra todo horizontalmente */
+  gap: 12px;              /* espacio entre texto e imagen */
+  margin-bottom: 20px;
+}
+
+.titulo-con-gif h3 {
+  margin: 0;
+}
+
+.titulo-con-gif .pokeball {
+  width: 40px;
+  height: 40px;
 }

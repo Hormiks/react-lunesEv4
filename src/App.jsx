@@ -4,7 +4,7 @@ import './App.css';
 function App(){
   return(
     <>
-    <h1>¡Conoce a tus Pokemones!</h1>
+    <h1 className='titulo'>¡Conoce a tus Pokemones!</h1>
     <PokemonFetcher />
     </>
   );
